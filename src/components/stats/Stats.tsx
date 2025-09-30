@@ -4,17 +4,11 @@ import { parseISO } from "date-fns";
 import { DailyDatapoint, DailyBarChart } from "./Charts";
 import CountUp from "react-countup";
 
-interface FollowerPercentile {
-  percentile: number;
-  value: number;
-}
-
 interface AuthorStatsResponse {
   total_users: number;
   total_posts: number;
   total_follows: number;
   total_likes: number;
-  follower_percentiles: FollowerPercentile[];
   updated_at: string;
   daily_data: DailyDatapoint[];
 }
@@ -163,34 +157,6 @@ const Stats: FC<{}> = () => {
                     title="Daily Followers"
                     startOffset={90}
                   />
-                </div>
-                <div className="py-8 mt-2 text-center">
-                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    <div className="text-gray-700 text-lg font-semibold">
-                      Followers per User Percentiles
-                    </div>
-                  </div>
-                  <div className="lg:mt-8 mt-2">
-                    <dl className="grid grid-cols-5 gap-x-2 lg:gap-x-8 gap-y-2 lg:gap-y-16 text-center lg:grid-cols-10 justify-center">
-                      {stats &&
-                        stats.follower_percentiles.map((p, idx) => (
-                          <div
-                            className="mx-auto flex max-w-xs flex-col lg:gap-y-4 gap-y-1"
-                            key={`p-${idx}`}
-                          >
-                            <dt className="text-base leading-7 text-gray-600">
-                              {p.percentile * 100}th
-                              <span className="hidden sm:block">
-                                Percentile
-                              </span>
-                            </dt>
-                            <dd className="order-first text-xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
-                              {Math.floor(p.value).toLocaleString()}
-                            </dd>
-                          </div>
-                        ))}
-                    </dl>
-                  </div>
                 </div>
                 <div className="py-8 mt-2 space-y-8">
                   <DailyBarChart
