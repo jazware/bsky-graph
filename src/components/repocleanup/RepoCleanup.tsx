@@ -108,6 +108,9 @@ const RepoCleanup: FC<{}> = () => {
     setLoading(actually_delete_stuff ? "delete" : "preview");
     await fetch(endpoint, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         identifier: identifier,
         app_password: appPass,
